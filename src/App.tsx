@@ -1,15 +1,25 @@
-import React from 'react';
+import React,{useState} from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import Button, {ButtonSize, ButtonType} from './components/Button/button'
 // import { Alert } from './components/Alert/alert';
 import Menu from './components/Menu/menu';
 import MenuItem from './components/Menu/menuItem';
 import SubMenu from './components/Menu/subMenu';
+import Icon from './components/Icon/icon';
+import Transition from './components/Transition/transition'
+library.add(fas);//添加所有图标
+
 const App:React.FC = () => {
+  const [show, setShow] = useState(false)
   return (
     <div className="App">
      <header className="App-header">
+        <Icon icon= 'arrow-down' theme ='primary' size='10x'></Icon>
+        {/* <FontAwesomeIcon icon={faCoffee}  size = '10x'></FontAwesomeIcon> */}
         <Menu defaultIndex={'0'} 
-          mode = 'vertical'
+          // mode = 'vertical'
           onSelect = {(index)=> {
             console.log(index);
           }}
@@ -41,24 +51,26 @@ const App:React.FC = () => {
             </MenuItem>
           </SubMenu>
        </Menu>
-       <Button style={{color:"red"}} >hello</Button>
-       <Button disabled >disabled hello</Button>
-       <Button btnType= {ButtonType.Primary} size = {ButtonSize.Large}>hello Primary </Button>
-       <Button btnType= {ButtonType.Link} href = "http://www.baidu.com" target= "_blank" >baidu link</Button>
-       <Button  disabled btnType= {ButtonType.Link} href = "www.baidu.com" >baidu link disabled</Button>
-       {/* <Alert className='danger'></Alert> */}
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-          👍😁😄
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        > 
-          Learn React
-        </a>
+
+       <Button btnType='primary' size = 'lg' onClick = {() => {
+         setShow(!show)
+       }}>toggle</Button>
+       <Transition in = {show} timeout = {300} animation = "zoom-in-left">
+        <div>
+          <p>
+            Edit <code>src/App.tsx</code> and save to reload.
+          </p>
+          <p>
+            Edit <code>src/App.tsx</code> and save to reload.
+          </p>
+          <p>
+            Edit <code>src/App.tsx</code> and save to reload.
+          </p>
+        </div>
+     </Transition>
+     <Transition in = {show} timeout = {300} animation = "zoom-in-left">
+        <Button btnType="primary"> A Large Button </Button>
+     </Transition>
       </header>
     </div>
   );

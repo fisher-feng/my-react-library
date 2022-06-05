@@ -12,14 +12,13 @@ export enum ButtonType {
   Default = "default",
   Danger = "danger",
   Link = "link",
- 
 }
 
 interface BaseButtonProps {
   className?:string;
   disabled?:boolean;
-  size?:ButtonSize;
-  btnType?:ButtonType;
+  size?:'lg'| 'sm';
+  btnType?:'primary'| "default" | "danger" | "link";
   children:React.ReactNode;
   href?:string;
 }
